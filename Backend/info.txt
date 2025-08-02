@@ -1,0 +1,1 @@
+mongodb+srv://krishnapandit52005:krishnapandit52005@cluster0.hm1qbuj.mongodb.net/flacify?retryWrites=true&w=majority&appName=Cluster0
