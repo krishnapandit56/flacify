@@ -12,11 +12,16 @@ client = MongoClient("mongodb+srv://krishnapandit52005:krishnafirstfullstack@clu
 db = client["flacify"]
 songs_collection = db["songs"]
 
+# If user preferences are empty, return 12 random songs
+if not user_preferences:
+    random_songs = list(songs_collection.aggregate([{"$sample": {"size": 12}}]))
+    print(json_util.dumps(random_songs))
+    sys.exit(0)
+
 # Collect all matched songs with flexible language handling
 all_results = []
 
 for pref in user_preferences:
-    # Find songs with matching mood and genre (ignore language for now)
     partial_query = {
         "mood": {"$regex": f"^{pref['mood']}$", "$options": "i"},
         "genre": {"$regex": f"^{pref['genre']}$", "$options": "i"},
@@ -24,14 +29,10 @@ for pref in user_preferences:
 
     matched_songs = songs_collection.find(partial_query)
     
-    # Score and store results
     for song in matched_songs:
         score = 2  # base score for mood + genre match
-
-        # Bonus point if language matches
         if 'language' in song and song['language'].lower() == pref['language'].lower():
             score += 1
-        
         all_results.append((score, song))
 
 # Sort results by score (higher is better)
