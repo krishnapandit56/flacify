@@ -16,7 +16,7 @@ if(userExist){
     let token = jwt.sign({username:req.body.username},secretkey,{expiresIn:'1h'})
     res.cookie('token',token,{
           httpOnly: true,
-  secure: false,
+  secure: true,
   sameSite: "None",
   maxAge: 2*3600000
     })
