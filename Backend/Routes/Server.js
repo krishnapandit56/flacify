@@ -21,7 +21,7 @@ const History = require('./History')
 const Recommend = require('./Recommend')
 
 app.use(cors({
-  origin: 'http://localhost:5173', // your frontend URL
+  origin: 'https://flacify.vercel.app', // your frontend URL
   credentials: true                // allows cookies
 }))
 
