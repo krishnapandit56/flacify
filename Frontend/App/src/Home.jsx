@@ -70,6 +70,7 @@ useEffect(()=>{
                     
                     setRecommendArray(result.songs)
                     setRecommendLoaded(true)
+                    console.log('array is ',recommendArray)
                    }
                    else{
                     setRecommendArray([])
