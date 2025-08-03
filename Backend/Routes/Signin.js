@@ -17,6 +17,7 @@ if(userExist){
     res.cookie('token',token,{
           httpOnly: true,
   secure: false,
+  sameSite: "None",
   maxAge: 2*3600000
     })
     res.json({message:'User Found !!',userexist:true,username:req.body.username})
