@@ -44,6 +44,10 @@ router.post('/', verifyToken, async (req, res) => {
         console.log(`${index + 1}. ${song.songname} - ${song.singer}`);
       });
 
+      if(!songs){
+        return res.json([])
+      }
+
       // ✅ Send response here
       return res.json({ songs });
 
