@@ -74,6 +74,7 @@ useEffect(()=>{
                    }
                    else{
                     setRecommendArray([])
+                    console.log('array is ',recommendArray)
                    }
                    
                    
