@@ -99,7 +99,7 @@ export default function(){
 
     async function UploadSong(){
       console.log('upload song called !!')
-      let result = await fetch('http://localhost:7000/UploadSong',{
+      let result = await fetch('https://flacify.onrender.com/api/UploadSong',{
         method:'post',
         body:JSON.stringify({songname,singer,composer,musicproducer,lyricswriter,imageurl,audiourl,username,genre,mood,language,streams:0}),
         credentials:'include',

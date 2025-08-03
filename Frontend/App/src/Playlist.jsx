@@ -6,7 +6,7 @@ export default function Playlist({username,audiourl,setSongName,setAudioUrl,setI
 
     async function FetchSong(audiourl){
         
-        let result = await fetch('http://localhost:7000/FetchSong',{
+        let result = await fetch('https://flacify.onrender.com/api/FetchSong',{
             method:'post',
             body:JSON.stringify({audiourl}),
             credentials: 'include',
@@ -27,7 +27,7 @@ export default function Playlist({username,audiourl,setSongName,setAudioUrl,setI
 
 
     async function FetchLikedSongs(){
-            let result = await fetch('http://localhost:7000/FetchLikedSongs',{
+            let result = await fetch('https://flacify.onrender.com/api/FetchLikedSongs',{
             method:'post',
             body:JSON.stringify({username}),
             credentials: 'include',

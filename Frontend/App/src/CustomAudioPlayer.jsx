@@ -21,7 +21,7 @@ export default function CustomAudioPlayer({
 
   async function History() {
     console.log("history called");
-    fetch("http://localhost:7000/History", {
+    fetch("https://flacify.onrender.com/api/History", {
       method: "post",
       body: JSON.stringify({ username, audiourl }),
       credentials: "include",
@@ -43,7 +43,7 @@ export default function CustomAudioPlayer({
 
   async function checklikesong() {
     console.log("check called");
-    let result = await fetch("http://localhost:7000/CheckLiked", {
+    let result = await fetch("https://flacify.onrender.com/api/CheckLiked", {
       method: "post",
       body: JSON.stringify({ username, audiourl, liked, songname, UploadedBy }),
       credentials: "include",
@@ -57,7 +57,7 @@ export default function CustomAudioPlayer({
   }
 
   async function likesong() {
-    await fetch("http://localhost:7000/Liked", {
+    await fetch("https://flacify.onrender.com/api/Liked", {
       method: "post",
       body: JSON.stringify({
         username,
