@@ -66,11 +66,16 @@ useEffect(()=>{
 
                    const result = await r.json()
                    console.log('suggestion sare',result.songs)
-                   if(!result.songs){
+                   if(result.songs){
+                    
+                    setRecommendArray(result.songs)
+                    setRecommendLoaded(true)
+                   }
+                   else{
                     setRecommendArray([])
                    }
-                   setRecommendArray(result.songs)
-                   setRecommendLoaded(true)
+                   
+                   
              
                  }
 
