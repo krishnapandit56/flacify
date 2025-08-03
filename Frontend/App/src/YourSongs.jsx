@@ -15,7 +15,7 @@ export default function YourSongs(){
                 async function fetchdata(){
                     console.log('called')
             
-            let result = await fetch('https://flacify.onrender.com/api/YourSongs',{
+            let result = await fetch('https://flacify.onrender.com/YourSongs',{
             method:'post',
             body:JSON.stringify({username1}),
             credentials: 'include',
@@ -40,7 +40,7 @@ export default function YourSongs(){
 
     
     async function deletesong(imageurl,songname){
-        let result = await fetch('https://flacify.onrender.com/api/DeleteSong',{
+        let result = await fetch('https://flacify.onrender.com/DeleteSong',{
             method:'post',
             body:JSON.stringify({imageurl,songname,username1}),
             credentials: 'include',

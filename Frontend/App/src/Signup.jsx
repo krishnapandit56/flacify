@@ -13,7 +13,7 @@ export default function Signup(){
 ////////////////////////////////////////////////////
     async function signup(){
         
-      let result = await fetch('https://flacify.onrender.com/api/Signup',{
+      let result = await fetch('https://flacify.onrender.com/Signup',{
       method:'post',
       body:JSON.stringify({username,email,password,otp}),
       headers:{
@@ -27,7 +27,7 @@ export default function Signup(){
 /////////////////////////////////////////////////////////////////
 
 async function sendotp(){
-        let result = await fetch('https://flacify.onrender.com/api/sendOTP',{
+        let result = await fetch('https://flacify.onrender.com/sendOTP',{
       method:'post',
       body:JSON.stringify({email}),
       headers:{

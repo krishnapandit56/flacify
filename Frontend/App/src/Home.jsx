@@ -56,7 +56,7 @@ useEffect(()=>{
 
     async function recommend(){
                      console.log('recommend called')
-                  let r = await fetch('https://flacify.onrender.com/api/Recommend',{
+                  let r = await fetch('https://flacify.onrender.com/Recommend',{
                    method:'post',
                    body:JSON.stringify({username}),
                     credentials: 'include',
@@ -74,7 +74,7 @@ useEffect(()=>{
     
                    async function updatestreams(audiourl){
                      console.log('fun called audio')
-                   await fetch('https://flacify.onrender.com/api/UpdateStreams',{
+                   await fetch('https://flacify.onrender.com/UpdateStreams',{
                    method:'post',
                    body:JSON.stringify({audiourl}),
                     credentials: 'include',
@@ -88,7 +88,7 @@ useEffect(()=>{
     async function SearchSong(){
       console.log('search called')
       
-           let result = await fetch('https://flacify.onrender.com/api/Searchsong',{
+           let result = await fetch('https://flacify.onrender.com/Searchsong',{
                method:'post',
                body:JSON.stringify({searchsong}),
                 credentials: 'include',
@@ -105,7 +105,7 @@ useEffect(()=>{
 
 async function logout(){
 
-           let result = await fetch('https://flacify.onrender.com/api/Logout',{
+           let result = await fetch('https://flacify.onrender.com/Logout',{
                method:'post',
                body:JSON.stringify({}),
                 credentials: 'include',
