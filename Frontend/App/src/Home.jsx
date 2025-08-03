@@ -210,7 +210,7 @@ return(
           }
         )}
 
-         {showRecommend?recommendArray.map(
+         {/* {showRecommend?recommendArray.map(
           (element,index)=>{
             return(<Card key={index} username={element.username} songname={element.songname} imageurl={element.imageurl} streams={element.streams}
               onClick={()=>{
@@ -237,7 +237,7 @@ return(
           recommendLoaded?<div/>: <div className='flex absolute top-[320px] left-[290px] animate-pulse'>
           <h2 className='text-[30px] text-gray-400'>Loading Recommendation...</h2>
          </div>
-        }
+        } */}
 
         </div>
 
