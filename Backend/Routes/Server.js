@@ -65,3 +65,7 @@ app.listen(7000,'0.0.0.0',()=>{
     console.log('App is running on port 7000')
 })
 
+app.get("/", (req, res) => {
+  res.send("Backend working!");
+});
+
