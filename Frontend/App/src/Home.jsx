@@ -74,7 +74,7 @@ useEffect(()=>{
                    }
                    else{
                     setRecommendArray([])
-                    setShowRecommend(false)
+                    
                     console.log('array is ',recommendArray)
                    }
                    
