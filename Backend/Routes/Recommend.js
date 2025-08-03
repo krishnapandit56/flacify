@@ -1,67 +1,39 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 const historyModel = require('../Schemas/historySchema');
 const verifyToken = require('../Middlewares/verifyToken');
 
 router.post('/', verifyToken, async (req, res) => {
-  const { spawn } = require('child_process');
-  const username = req.body.username;
-  console.log('body is : ', username);
+  try {
+    const username = req.user.username;
 
-  const rawPreferences = await historyModel.find({ username });
+    const rawPreferences = await historyModel.find({ username });
 
-  const userPreferences = rawPreferences
-    .filter(p => p && p.mood && p.genre && p.language)
-    .map(p => ({
-      mood: p.mood,
-      genre: p.genre,
-      language: p.language,
-    }));
+    const userPreferences = rawPreferences
+      .filter(p => p && p.mood && p.genre && p.language)
+      .map(p => ({
+        mood: p.mood,
+        genre: p.genre,
+        language: p.language,
+      }));
 
-  const python = spawn('python', ['suggest_songs.py']);
+    const response = await axios.post('https://your-python-api.onrender.com/recommend', {
+      preferences: userPreferences,
+    });
 
-  let output = '';
-  let error = '';
+    const songs = response.data;
 
-  python.stdout.on('data', (data) => {
-    output += data.toString();
-  });
-
-  python.stderr.on('data', (data) => {
-    error += data.toString();
-  });
-
-  python.on('close', (code) => {
-    if (error) {
-      console.error('❌ Python Error:\n', error);
-      return res.status(500).json({ error: 'Python script error' });
+    if (!songs || songs.length === 0) {
+      return res.json({ songs: [] });
+    } else {
+      return res.json({ songs });
     }
 
-    try {
-      const songs = JSON.parse(output);
-      console.log("🎵 Suggested Songs:");
-      songs.forEach((song, index) => {
-        console.log(`${index + 1}. ${song.songname} - ${song.singer}`);
-      });
-
-if (!songs || songs.length === 0) {
-  return res.json({ songs: [] });
-} else {
-  return res.json({ songs });
-}
-
-  
-
-    } catch (err) {
-      console.error('❌ Failed to parse Python output:', err.message);
-      console.log('Raw output was:', output);
-      return res.status(500).json({ error: 'Invalid JSON from Python' });
-    }
-  });
-
-  // Send preferences to Python via stdin
-  python.stdin.write(JSON.stringify(userPreferences));
-  python.stdin.end();
+  } catch (err) {
+    console.error('❌ Python API error:', err.message);
+    return res.status(500).json({ error: 'Recommendation service failed' });
+  }
 });
 
 module.exports = router;
