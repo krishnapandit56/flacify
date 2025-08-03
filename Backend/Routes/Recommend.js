@@ -47,9 +47,12 @@ router.post('/', verifyToken, async (req, res) => {
       if(!songs){
         return res.json([])
       }
-
-      // ✅ Send response here
+      else{
+    // ✅ Send response here
       return res.json({ songs });
+      }
+
+  
 
     } catch (err) {
       console.error('❌ Failed to parse Python output:', err.message);
