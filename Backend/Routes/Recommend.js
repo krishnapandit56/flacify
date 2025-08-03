@@ -44,13 +44,11 @@ router.post('/', verifyToken, async (req, res) => {
         console.log(`${index + 1}. ${song.songname} - ${song.singer}`);
       });
 
-      if(!songs){
-        return res.json([])
-      }
-      else{
-    // ✅ Send response here
-      return res.json({ songs });
-      }
+if (!songs || songs.length === 0) {
+  return res.json({ songs: [] });
+} else {
+  return res.json({ songs });
+}
 
   
 
