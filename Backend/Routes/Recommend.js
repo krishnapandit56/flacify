@@ -18,7 +18,7 @@ router.post('/', verifyToken, async (req, res) => {
         language: p.language,
       }));
 
-    const response = await axios.post('https://your-python-api.onrender.com/recommend', {
+    const response = await axios.post('https://flacify-1.onrender.com/recommend', {
       preferences: userPreferences,
     });
 
