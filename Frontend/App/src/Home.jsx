@@ -51,7 +51,6 @@ useEffect(()=>{
       }
     }
 
-console.log("username is : ",username)
 
 
     async function recommend(){
