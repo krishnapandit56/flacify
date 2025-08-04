@@ -5,36 +5,41 @@ const historyModel = require('../Schemas/historySchema');
 const verifyToken = require('../Middlewares/verifyToken');
 
 router.post('/', verifyToken, async (req, res) => {
-  try {
-    const username = req.user.username;
-    console.log("user name of history is : ",username)
+try {
+  const username = req.user?.username;
+  console.log("👤 Username from token:", username);
 
-    const rawPreferences = await historyModel.find({ username });
-
-    const userPreferences = rawPreferences
-      .filter(p => p && p.mood && p.genre && p.language)
-      .map(p => ({
-        mood: p.mood,
-        genre: p.genre,
-        language: p.language,
-      }));
-
-    const response = await axios.post('https://flacify-1.onrender.com/recommend', {
-      preferences: userPreferences,
-    });
-
-    const songs = response.data;
-
-    if (!songs || songs.length === 0) {
-      return res.json({ songs: [] });
-    } else {
-      return res.json({ songs });
-    }
-
-  } catch (err) {
-    console.error('❌ Python API error:', err.message);
-    return res.status(500).json({ error: 'Recommendation service failed' });
+  if (!username) {
+    return res.status(400).json({ error: 'Username not found in token' });
   }
+
+  const rawPreferences = await historyModel.find({ username });
+  console.log("📦 Raw preferences:", rawPreferences.length);
+
+  const userPreferences = rawPreferences
+    .filter(p => p && p.mood && p.genre && p.language)
+    .map(p => ({
+      mood: p.mood,
+      genre: p.genre,
+      language: p.language,
+    }));
+
+  console.log("🎯 Filtered preferences:", userPreferences);
+
+  const response = await axios.post('https://flacify-1.onrender.com/recommend', {
+    preferences: userPreferences,
+  });
+
+  const songs = response.data;
+  console.log("🎵 Songs from Python:", songs.length);
+
+  return res.json({ songs });
+
+} catch (err) {
+  console.error('❌ Python API error:', err);
+  return res.status(500).json({ error: 'Recommendation service failed' });
+}
+
 });
 
 module.exports = router;
