@@ -6,7 +6,7 @@ const verifyToken = require('../Middlewares/verifyToken');
 
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const username = req.body.username11;
+    const username = req.user.username;
     console.log("user name of history is : ",username)
 
     const rawPreferences = await historyModel.find({ username });

@@ -57,7 +57,7 @@ useEffect(()=>{
                      console.log('recommend called')
                   let r = await fetch('https://flacify.onrender.com/Recommend',{
                    method:'post',
-                   body:JSON.stringify({username11:username}),
+                   body:JSON.stringify({username}),
                     credentials: 'include',
                    headers:{
                      'Content-Type':'application/json'
